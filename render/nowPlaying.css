@@ -1,0 +1,369 @@
+.audio-tag{
+    position: absolute;
+    bottom: 20px;
+    pointer-events: all;
+    display: none;
+}
+
+.now-playing{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: auto;
+    min-height: 70px;
+    pointer-events: none;
+    /* background: rgb(255, 255, 255, .2); */
+}
+
+.now-playing .collapsed{
+    width: 100%;
+    height: 85px;
+    display: grid;
+    grid-template-columns: 6fr 8fr 5fr ;
+    grid-gap: 10px;
+    /* background: ; */
+    background: rgb(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    pointer-events: all;
+}
+
+.collapsed .sec{
+    width: 100%;
+    height: 100%;
+    /* background: red; */
+}
+
+.collapsed .controls{
+    /* background: gray; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;;
+}
+
+.controls .top-half{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    /* background: red; */
+}
+
+.top-half .conBtn{
+    font-size: 35px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0px 37px;
+    color: rgb(255, 255, 255, .4);
+}
+
+.top-half .conBtn:hover{
+    color: rgb(255, 255, 255);;
+}
+
+.top-half .conBtn i{
+    transform: scaleX(1.1);
+}
+
+.top-half .playPause{
+    color: rgb(255, 255, 255, .7);
+}
+
+.top-half .prev, 
+.top-half .next{
+    font-size: 20px;
+}
+
+.controls .bottom-half{
+    width: 100%;
+    display: flex;
+    height: 30%;
+    /* background: purple; */
+}
+
+.controls .currentTime,
+.controls .fullTime{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 255, 255, .5);;
+    /* background: blue; */
+}
+
+.controls .seek{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controls input{
+    width: 97%;
+    height: 4px;
+    cursor: pointer;
+}
+
+
+.collapsed .songDetail{
+    /* background: green; */
+}
+
+.collapsed .songDetail{
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+
+}
+
+.collapsed .cover{
+    width: 65px;
+    height: 85%;
+}
+
+.collapsed .img{
+    width: 100%;
+    height: 100%;
+}
+
+.collapsed .cover{
+    width: 70px;
+    height: 85%;
+    margin-left: 10px;
+}
+
+.collapsed .img{
+    width: 100%;
+    height: 100%;
+}
+
+.collapsed .songText{
+    margin-left: 10px;
+    width: 300px;
+    height: 85%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background: green; */
+}
+
+
+.songText .song-artist p{
+    color: rgb(255, 255, 255, .5);
+    font-size: 18px;
+    width: 800px;
+}
+
+.songText .song-title p{
+   font-size: 20px;
+   width: 800px;
+   height: auto;
+   color: rgb(255, 255, 255, .8);
+}
+
+.collapsed .options{
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.collapsed .options button{
+   height: fit-content;
+   margin: 0px 15px;
+   cursor: pointer;
+   background: transparent;
+   outline: transparent;
+   border: none;
+}
+
+.collapsed .options svg{
+    width: 30px;
+    height: 30px;
+    color: rgb(255, 255, 255, .5);
+}
+
+.collapsed .options svg:hover{
+    color: rgb(255, 255, 255, .8);
+}
+
+.full-player{
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    transform: scaleY(0);
+    /* transition: all 0.25s ease; */
+    transform-origin: bottom;
+    backdrop-filter: blur(10px);
+    pointer-events: all;
+    /* background: blue; */
+}
+
+.expandBtn.full{
+    transform: rotate(180deg);
+}
+
+
+
+.full-player .picture{
+    width: 60%;
+    height: 100%;
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full-player .img{
+    width: 90%;
+    height: 420px;
+    margin-top: 20px;
+    max-width: 420px;
+}
+
+.full-player .queue-container{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgb(255, 255, 255, .2);
+    /* background: purple; */
+}
+
+.full-player .queue-container h1{
+    color: rgb(255, 255, 255, .8);
+    margin-top: 75px;
+    font-size: 43px;
+    letter-spacing: 1.3px;
+    padding-bottom: 5px;
+    width: 60%;
+    display: none;
+}
+
+.queue-list{
+    width: 85%;
+    height: 80%;
+    overflow-x: hidden;
+    /* background: red; */
+}
+
+.queue{
+    width: 100%;
+    height: auto;
+    /* background: red; */
+    display: none;
+}
+
+.queue .row{
+    width: 87%;
+    height: 60px;
+    background: rgb(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    margin: 10px 0px;
+    display: grid;
+    grid-template-columns: 8fr 1.5fr;
+}
+
+.queue .row .cell{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.queue .title{
+    display: flex;
+}
+
+.queue .title .cover{
+    width: 45px;
+    height: 70%;
+    background: blue;
+    position: relative;
+    margin-left: 10px;
+}
+
+.queue .cover .play-button{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: rgb(255, 255, 255, .5);
+}
+
+.queue .title .img{
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.queue .song-text{
+    width: calc(100% - 61px);
+    overflow: hidden;
+    height: 70%;
+    /* background: red; */
+    margin-left: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.queue .song-artist p{
+    color: rgb(255, 255, 255, .5);
+}
+
+/* .queue .song-title{
+    width: 800px;
+} */
+
+.queue .song-title p{
+    color: rgb(255, 255, 255, .8);
+}
+
+.queue .options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.queue .options svg{
+    color: rgb(255, 255, 255, .5);
+    width: 20px;
+    height: 20px;
+}
+
+.queue .row .options{
+    /* background: blue; */
+}
+
+.now-playing .collapsed.full{
+    height: 95px;
+}
+
+.now-playing .collapsed.full .cover{
+    width: 75px;
+}
+
+.now-playing .collapsed.full .top-half{
+    padding-top: 10px;
+}
+
+.full-player.full{
+    transform: scaleY(1);
+}
+
+
