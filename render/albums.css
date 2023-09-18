@@ -1,0 +1,131 @@
+.albums-container,
+.artists-container,
+.playlists-container{
+    width: 100%;
+    height: calc(100% - 30px);
+    /* background: red; */
+    overflow-x: hidden;
+}
+
+
+/* .window.albums{
+    overflow-x: hidden;
+} */
+
+.albums-list,
+.artists-list,
+.playlist-overflow{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* min-height: 100%; */
+    /* background-color: blue; */
+}
+
+.albums-list .album-card,
+.artists-list .artist-card,
+.playlist-overflow .playlist-card{
+    width: 220px;
+    height: 270px;
+    margin: 10px 10px 20px 10px;
+    background: rgb(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.artists-list .artist-card{
+    /* visibility: visible; */
+    border-radius: 5px;
+    justify-content: center;
+    background: rgb(255, 255, 255, .1);
+}
+
+.playlist-overflow .playlist-card{
+    visibility: visible;
+}
+
+.artist-card img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.albums-list .album-card.show,
+.artists-list .artist-card.show{
+    visibility: initial
+}
+
+.album-card .album-cover,
+.playlist-card .playlist-cover{
+    margin-top: 6px;
+    width: 87%;
+    height: 73%;
+    background: rebeccapurple;
+}
+
+.album-card .album-cover img,
+.playlist-card, .playlist-cover img{
+    width: 100%;
+    height: 100%;
+}
+
+.album-card-text{
+    width: 87%;
+    height: 27%;
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: column;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.album-card-title p,
+.playlist-card-title p{
+    font-size: 21px;
+    width: 800px;
+    line-height: 20px;
+    color: rgb(255, 255, 255, .8);
+    font-weight: 800;
+}
+
+.album-card-title p:hover,
+.playlist-card-title p:hover{
+    text-transform: underline;
+}
+
+.album-card-artist{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.album-card-artist p{
+    width: 600px;
+    color: rgb(255, 255, 255, .5);
+}
+
+.artist-cover{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgb(255, 255, 255, .3);
+}
+
+.artist-card-name{
+    font-size: 27px;
+    height: auto;
+    font-weight: 900;
+    letter-spacing: 1.3;
+    overflow: hidden;
+    margin-top: 20px;
+    color: rgb(255, 255, 255, .9);
+}
+
+.artist-card-name p{
+    /* width: 600px; */
+}

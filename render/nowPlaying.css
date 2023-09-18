@@ -1,3 +1,7 @@
+*{
+    user-select: none;
+}
+
 .audio-tag{
     position: absolute;
     bottom: 20px;
@@ -12,6 +16,7 @@
     width: 100vw;
     height: auto;
     min-height: 70px;
+    z-index: 0;
     pointer-events: none;
     /* background: rgb(255, 255, 255, .2); */
 }
@@ -71,8 +76,56 @@
 }
 
 .top-half .playPause{
-    color: rgb(255, 255, 255, .7);
+    position: relative;
+    width: 40px;
+    height: 100%;
+    margin: 0px 25px;
 }
+
+.top-half .playPause button{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(255, 255, 255, .7);
+    height: 100%;
+    cursor: pointer;
+    font-size: 36px;
+}
+
+.top-half .playPause button:hover{
+    color: rgb(255, 255, 255);
+}
+
+.playBtn{
+    display: none;
+}
+
+.pauseBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playBtn.play{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playBtn.play + .pauseBtn{
+    display: none;
+}
+
+.pauseBtn svg{
+    width: 60px;
+    height: 60px;
+}
+
+
 
 .top-half .prev, 
 .top-half .next{
@@ -125,6 +178,7 @@
 .collapsed .cover{
     width: 65px;
     height: 85%;
+    background: rgb(255, 255, 255, .5);
 }
 
 .collapsed .img{
@@ -176,13 +230,140 @@
     padding-right: 20px;
 }
 
-.collapsed .options button{
+.collapsed .options button, .collapsed .options label{
    height: fit-content;
    margin: 0px 15px;
    cursor: pointer;
    background: transparent;
    outline: transparent;
    border: none;
+}
+
+.collapsed .volume{
+    position: relative;
+    width: 70px;
+    height: 30px;
+}
+
+.collapsed .volume button{
+    display: none;
+}
+
+.collapsed .volume .volumeBtn{
+    display: flex;
+}
+
+.collapsed .volume.muted .mutedBtn{
+    display: flex;
+}
+
+.collapsed .volume.muted .volumeBtn{
+    display: none;
+}
+
+
+
+.collapsed .volume .optBtn{
+    position: absolute;
+    /* top: 0px;
+    left: 0px; */
+}
+
+.collapsed #repeat{
+    display: none;
+}
+
+.collapsed .options{
+    position: relative;
+}
+
+.options-list{
+    width: 190px;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    background: rgb(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+}
+
+.collapsed .options-list{
+    position: absolute;
+    top: -255px;
+    left: 16%;
+    height: 250px;
+}
+
+
+
+.songs-list .options-list{
+    width: 180px;
+    /* display: flex; */
+    position: absolute;
+    top: 40px;
+    right: -5%;
+    height: 200px;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+.songs-list .options-list::-webkit-scrollbar{
+    width: 5px;
+    background: rgb(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+}
+
+
+.songs-list .options-overflow{
+    width: 100%;
+    height: 400px;
+}
+
+.options-list.show{
+    display: flex;
+}
+
+
+.collapsed .options-list.show{
+    display: flex;
+}
+
+.options-list .part{
+    width: 100%;
+    /* margin: 2px 0px; */
+    /* background: red; */
+    cursor: pointer;
+    color: rgb(255, 255, 255, .8);
+    height: 20%;
+    display: flex;
+}
+
+.options-list .part:hover{
+    background: rgb(255, 255, 255, .2);
+}
+
+.options-list i{
+    width: 20%;
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    /* background: #4d4dff; */
+}
+
+.options-list p{
+    width: 80%;
+    /* background: green; */
+    font-size: 17px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.collapsed .options label svg.checked{
+    color: #4d4dff;
 }
 
 .collapsed .options svg{
@@ -219,6 +400,7 @@
     /* background: red; */
     display: flex;
     align-items: center;
+    /* background: blueviolet; */
     justify-content: center;
 }
 
@@ -226,6 +408,7 @@
     width: 90%;
     height: 420px;
     margin-top: 20px;
+    background: rgb(255, 255, 255, .5);
     max-width: 420px;
 }
 
@@ -233,6 +416,8 @@
     width: 40%;
     height: 100%;
     display: flex;
+    position: relative;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-left: 1px solid rgb(255, 255, 255, .2);
@@ -241,15 +426,31 @@
 
 .full-player .queue-container h1{
     color: rgb(255, 255, 255, .8);
-    margin-top: 75px;
-    font-size: 43px;
+    margin-top: 65px;
+    font-size: 38px;
     letter-spacing: 1.3px;
     padding-bottom: 5px;
     width: 60%;
     display: none;
+    justify-content: flex-start;
+}
+
+.clear-queue{
+    position: absolute;
+    right: 13%;
+    top: 30px;
+    background: rgb(255, 255, 255, .2);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    color: rgb(255, 255, 255, .7);
 }
 
 .queue-list{
+    position: relative;
+    top: 40px;
     width: 85%;
     height: 80%;
     overflow-x: hidden;
@@ -260,18 +461,29 @@
     width: 100%;
     height: auto;
     /* background: red; */
-    display: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-queue.none{
+    pointer-events: none;
+    opacity: .7;
 }
 
 .queue .row{
     width: 87%;
     height: 60px;
-    background: rgb(255, 255, 255, .2);
+    background: rgb(255, 255, 255, .1);
     backdrop-filter: blur(10px);
+    position: relative;
     border-radius: 5px;
     margin: 10px 0px;
     display: grid;
     grid-template-columns: 8fr 1.5fr;
+}
+
+.queue .row.over{
+    border-top: 1.4px solid #98beff;
 }
 
 .queue .row .cell{
@@ -287,10 +499,25 @@
 .queue .title .cover{
     width: 45px;
     height: 70%;
-    background: blue;
+    /* background: blue; */
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 10px;
 }
+
+.queue .cover p{
+    font-size: 23px;
+    font-weight: bolder;
+    color: rgb(255, 255, 255, .8);
+}
+
+.queue .row:hover .cover p{
+    display: none;
+}
+
+
 
 .queue .cover .play-button{
     position: absolute;
@@ -302,8 +529,133 @@
     width: 100%;
     height: 100%;
     font-size: 20px;
+    display: none;
     color: rgb(255, 255, 255, .5);
 }
+
+.queue .row:hover .play-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.queue .row .playing-animation{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    /* background: #4d4dff; */
+}
+
+
+
+
+.queue .row.isplaying{
+    background: rgb(255, 255, 255, .2);
+}
+
+.queue .row.row.isplaying .song-title p{
+    color: #98beff;
+}
+
+.queue .row.isplaying .playing-animation{
+    display: flex;
+}
+
+.queue .row.isplaying .cover p{
+    display: none;
+}
+
+
+.queue .song-title:hover p{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.queue .row:hover .playing-animation{
+    display: none;
+}
+
+
+.bars{
+    width: 75%;
+    height: 60%;
+    /* background: red; */
+    display: flex;
+    align-items: flex-end   ;
+}
+
+.bar{
+    width: 5px;
+    height: 90%;
+    margin: 0px 1.7px;
+    background: rgb(255, 255, 255, .5);
+    animation: wave 0.8s linear infinite;
+    animation-play-state: running;
+}
+
+.bar.paused{
+    animation-play-state: paused;
+}
+
+/* .bar:nth-child(even){
+    height: 55%;
+} */
+
+@keyframes wave {
+    50%{
+        height: 45%;
+    }
+
+    100%{
+       height: 90%; 
+    }
+}
+
+.bar:nth-child(odd){
+    animation-delay: 0s;
+}
+
+.bar:nth-child(even){
+    animation-delay: 0.5s;
+}
+
+.queue .options-list{
+    position: absolute;
+    right: 10px;
+    bottom: -200px;
+    /* display: flex; */
+    height: 250px;
+    background: rgb(255, 255, 255, .5);
+}
+
+
+
+
+.queue .options-list .part p,
+.queue .options-list .part i{
+    color: #1d005f;
+}
+
+.queue .options-list .part:last-child p,
+.queue .options-list .part:last-child i{
+    color: #ff1b1b;
+}
+
+.full-player.full + .collapsed .options-list .part p,
+.full-player.full +  .collapsed .options-list .part i{
+    color: #1d005f;
+}
+
+.full-player.full + .collapsed .options-list{
+    background: rgb(255, 255, 255, .5);
+}
+
 
 .queue .title .img{
     margin: 0px;
@@ -326,9 +678,9 @@
     color: rgb(255, 255, 255, .5);
 }
 
-/* .queue .song-title{
-    width: 800px;
-} */
+.queue .song-title{
+    overflow: hidden;
+}
 
 .queue .song-title p{
     color: rgb(255, 255, 255, .8);
@@ -345,6 +697,8 @@
     width: 20px;
     height: 20px;
 }
+
+
 
 .queue .row .options{
     /* background: blue; */
@@ -365,5 +719,7 @@
 .full-player.full{
     transform: scaleY(1);
 }
+
+
 
 

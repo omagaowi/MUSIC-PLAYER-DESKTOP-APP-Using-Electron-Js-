@@ -1,0 +1,340 @@
+.window.playists{
+    position: relative;
+}
+.add-playlist-window{
+    width: 90%;
+    max-width: 350px;
+    height: 280px;
+    background: rgb(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    border-radius: 6px;
+    left: 50%;
+  transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%)
+    scale(0.3);
+}
+
+.dynamicPlaylist .song .options-list{
+    height: 200px;
+}   
+
+.dynamicPlaylist .song .options-list .part{
+    height: 20%;
+}
+
+.add-playlist-window.show{
+    opacity: initial;
+    pointer-events: all;
+    transform: translate(-50%, -50%)
+    scale(1);
+    z-index: 1;
+}
+
+.add-playlist-window h1{
+    color: rgb(255, 255, 255, .8);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.add-playlist-window .close-pl-window{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.add-playlist-window .close-pl-window i{
+    font-size: 23px;
+    color: #6b0000;
+    cursor: pointer;
+}
+
+.add-playlist-window .my-playlists{
+    width: 90%;
+    height: 100px;
+    display: flex;
+    overflow-x: hidden;
+      border-radius: 6px;
+    /* background: red; */
+}
+
+.add-playlist-window .my-playlist-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    height: fit-content;
+    /* background: purple; */
+}
+
+.new-playlist{
+    width: 77%;
+    height: 40px;
+    /* background: purple; */
+     background: rgb(255, 255, 255, .2);
+    margin-top: 20px;
+    display: flex;
+      border-radius: 6px;
+}
+
+.new-playlist:hover{
+    background: rgb(255, 255, 255, .3);
+}
+
+.new-playlist input{
+    height: 100%;
+    display: flex;
+    background: none;
+    outline: none;
+    font-size: 19px;
+    transition: all 0.3s ease;
+    padding-left: 6px;
+    color: rgb(255, 255, 255, .8);
+    border: none;
+    flex: 4.5;
+}
+
+.new-playlist button{
+    height: 100%;
+    display: flex;
+    flex: 1;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    pointer-events: all;
+    font-size: 24px;
+    color: rgb(255, 255, 255, .8);
+    background: rgb(255, 255, 255, .3);
+      transition: all 0.3s ease;
+     align-items: center;
+    justify-content: center;
+}
+
+.my-playlist-list .playlist{
+    width: 96%;
+    height: 50px;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    margin: 7px 10px;
+    border: none;
+      border-radius: 6px;
+    font-size: 24px;
+    color: rgb(255, 255, 255, .8);
+    background: rgb(255, 255, 255, .3);
+}
+
+.my-playlist-list .playlist:hover{
+    background: rgb(255, 255, 255, .5);
+}
+
+
+.new-playlist.active input{
+    display: none;
+}
+
+.new-playlist.active button{
+    display: flex;
+    width: 100%;
+    pointer-events: none;
+    /* background: green; */
+      background: transparent;
+}
+
+.new-playlist.active button p{
+   display: flex;
+}
+
+.new-playlist button p{
+    display: none;
+    margin-left: 10px;
+    font-size: 22px;
+}
+
+.playlist-card{
+    position: relative;
+}
+
+.add-playlist-window::-webkit-scrollbar{
+    width: 5px;
+    background: rgb(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+}
+
+
+.playlist-card .playlist-cover{
+    background: rgb(255, 255, 255, .3);
+}
+
+.playlist-card-title{
+    position: relative;
+    top: 13px;
+    overflow: hidden;
+    width: 87%;
+    /* background: blue; */
+}
+
+.playlist-card-title p{
+    font-size: 24px;
+}
+
+.playlist-card-title p:hover{
+    text-decoration: underline;
+}
+
+
+.playlist-card button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #ff6d6d;
+    display: none;
+}
+
+.playlist-card button:hover{
+    cursor: pointer;
+    color: #ff2929;
+}
+
+.playlist-card:hover button{
+    display: flex;
+}
+
+.playlist-card button i{
+    font-size: 17px;
+}
+
+
+
+.add-new{
+    position: absolute;
+    bottom: 60px;
+    width: 50px;
+    background: rgb(255, 255, 255, .3);
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255, .8);
+    border-radius: 5px;
+    height: 50px;
+    cursor: pointer;
+    right: 15px;
+}
+
+.add-new-playlist{
+    width: 90%;
+    max-width: 300px;
+    height: 170px;
+    background: rgb(255, 255, 255, .3);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 46%;
+    transform: translate(-50%, -50%)
+    scale(0.5);
+    opacity: 0;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    border-radius: 6px;
+}
+
+.delete-playlist-confirm{
+    width: 90%;
+    max-width: 260px;
+    border-radius: 5px;
+    height: 140px;
+    background: rgba(219, 219, 219, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    transform: translate(-50%, -50%)
+    scale(0.4);
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-playlist-confirm.show{
+    transform: translate(-50%, -50%)
+    scale(1);
+    opacity: inherit;
+    pointer-events: all;
+}
+
+.delete-playlist-confirm .confirm-h3{
+    font-size: 25px;
+    color: #6b0000;
+}
+
+.delete-playlist-confirm .full-delete{
+    position: relative;
+    top: 10px;
+    width: 90px;
+    height: 30px;
+    border: none;
+    color: #ff2929;
+    cursor: pointer;
+    outline: none;
+}
+
+.add-new-playlist.show{
+    transform: translate(-50%, -50%)
+    scale(1);
+    opacity: 1;
+}
+
+
+
+.add-new-playlist input{
+    width: 93%;
+    background: rgb(255, 255, 255, .3);
+    border: none;
+    outline: none;
+    padding-left: 5px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: rgb(255, 255, 255, .8);
+}
+
+.add-new-playlist button{
+    width: 100px;
+    background: rgb(255, 255, 255, .3);
+    border: none;
+    outline: none;
+    margin-top: 20px;
+    cursor: pointer;
+    color: rgb(255, 255, 255, .8);
+    border-radius: 5px;
+    height: 35px;
+}
+
+.add-new-playlist button i{
+   margin-right: 5px;
+}
+
+.add-new:hover{
+    background: rgb(255, 255, 255, .4);
+}
+
+.add-new i{
+    font-size: 23px;
+}   

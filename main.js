@@ -1,13 +1,17 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const express = require('express');
 const path = require('path');
 const fs = require('fs')
 const fs2 = require('fs').promises
 const NodeID3 = require('node-id3')
-
+const os = require('os');
+const userFolder = os.homedir()
+// const { ipcMain } = require('electron');
+// mainWindow.webContents.send('update-counter', 1)
 
 // Create the Express app
 const expressApp = express();
+expressApp.set('view engine', 'ejs')
 let songsLists = []
 function getMeta(fileURL, fileName){
     const tags = NodeID3.read(fileURL)
@@ -17,6 +21,7 @@ function getMeta(fileURL, fileName){
     let cover = tags.image
     let year = tags.year
     let genre = tags.genre
+    let trackNo = tags.trackNumber
 
     title = title == undefined ? fileName : title;
     artist = artist == undefined ? "unknown artist" : artist;
@@ -24,6 +29,7 @@ function getMeta(fileURL, fileName){
     cover = cover == undefined ? "unknown cover" : cover;
     year = year == undefined ? "unknown year" : year;
     genre = genre == undefined ? "unknown genre" : genre;
+    trackNo = trackNo == undefined ? "#" : trackNo;
     // console.log(artist)
     const trackDetails = {
         title: title,
@@ -32,9 +38,11 @@ function getMeta(fileURL, fileName){
         year: year,
         cover: cover,
         path: fileURL,
-        genre: genre
+        genre: genre,
+        trackNo: trackNo
     }
     // console.log(trackDetails)
+    // console.log(tags.time)
     songsLists.push(trackDetails)
 }
 // getMeta()
@@ -60,12 +68,37 @@ async function findFiles(folderName) {
       });
     });
   }
-  findFiles("C:/Users/omaga/Music");
+
+  const musicFolder = path.join(userFolder, 'Music')
+  // console.log(musicFolder)
+  findFiles(musicFolder);
 
   expressApp.get('/', (req, res) => {
     //   res.send('Hello from Express!');
       res.json(songsLists)
     });
+
+    // expressApp.get('/share', (req, res) => {
+    //   //   res.send('Hello from Express!');
+    //    res.render('index.ejs')
+    //   });
+
+    //   expressApp.get('/share/:path/*', (req, res) => {
+    //       console.log(path.join(req.params.path, req.params[0]))
+    //       const Filepath = path.join(req.params.path, req.params[0])
+    //       fs.readFile(Filepath, (err, data)=>{
+    //         if(err){
+    //           console.log(err)
+    //         }else{
+    //           // console.log(data)
+
+    //           // res.send('data')
+    //           res.json(data)
+    //         }
+    //       })
+    //       // const file = fs.readFile(Filepath)
+    //       // res.send(file)
+    //     });
     
   
 
@@ -74,28 +107,35 @@ const server = expressApp.listen(3000, () => {
   console.log('Express server running on port 3000!');
 });
 
+let mainWindow
+
 // Create the Electron window
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
+      preload: path.join(__dirname, '/render/preload.js'),
       accelerator: true,
-      nodeIntegration: true, // Enable Node.js integration in the Electron window
+      nodeIntegration: false, 
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote// Enable Node.js integration in the Electron window
     }
   });
-
-  // Load the index.html file
-  mainWindow.loadFile(path.join(__dirname, '/render/index.html'));
-
   // Open DevTools (optional)
-  // mainWindow.webContents.openDevTools();
 }
 
 // Start the Electron app
 app.enableSandbox()
 app.whenReady().then(() => {
   createWindow();
+  mainWindow.webContents.send('update-counter', 'Hello')
+  mainWindow.loadFile(path.join(__dirname, '/render/index.html'));
+  mainWindow.webContents.send('update-counter', 'Hello')
+});
+
+app.on('open-file', (event, path) => {
+  console.log(path)
 });
 
 // Quit the app when all windows are closed (optional)

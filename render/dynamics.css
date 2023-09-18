@@ -1,0 +1,537 @@
+.dynamicAlbum, .dynamicArtist, .dynamicPlaylist{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 550px;
+    height: 95vh;
+    background-color: rgb(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0.5)
+    translate(-50%, -50%);
+    display: flex;
+    pointer-events: none;
+    flex-direction: column;
+    /* z-index: -1; */
+}
+
+.now-playing.active{
+    z-index: 1;
+}
+
+.dynamicAlbum .song .play-button,
+.dynamicArtist .song .cover button,
+.dynamicPlaylist .song .cover button{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: rgb(255, 255, 255, .5);
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.dynamicArtist .song:hover .cover button,
+.dynamicPlaylist .song:hover .cover button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255, .8);
+}
+
+.cover button:hover{
+    cursor: pointer;
+}
+
+
+.dynamicAlbum .song .song-no{
+    position: relative;
+}
+
+
+.dynamicAlbum .song .play-button:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255, .8);
+}
+
+
+.dynamicAlbum .song:hover .play-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dynamicAlbum .song:hover .song-no p{
+   display: none;
+}
+
+.dynamicAlbum.show, .dynamicArtist.show,
+.dynamicPlaylist.show{
+    opacity: initial;
+    transform: scale(1)
+    translate(-50%, -50%);
+    pointer-events: all;
+}
+
+.dynamicAlbum .song-title p:hover,
+.dynamicArtist .song-title p:hover,
+.dynamicPlaylist .song-title p:hover{
+    text-decoration: underline;
+}
+
+
+/* .dynamicArtist{
+    opacity: initial;
+    transform: scale(1)
+    translate(-50%, -50%);
+    pointer-events: all;
+    display: none;
+} */
+
+.now-playing.stackup{
+    z-index: 1;
+}
+
+.now-playing.stackdown{
+    z-index: 0;
+}
+
+.dynamicAlbum.stackup{
+    z-index: 1;
+}
+
+.dynamicAlbum.stackdown{
+    z-index: 0;
+}
+
+.album-head,
+.artist-head{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    border-bottom: 1px solid rgb(255, 255, 255, .2);
+    /* background: red; */
+}
+
+.album-head .album-cover,
+.artist-head .artist-cover{
+    width: 210px;
+    height: 210px;
+    background: #663399;
+    /* background: #b90000;
+    background: #000096; */
+    margin-right: 10px;
+}
+
+.album-head img,
+.artist-head img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.album-text, .artist-text{
+    width: calc(100% - 240px);
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 10px;
+    justify-content: center;
+    /* background: red; */
+}
+
+
+
+
+.album-title,
+.artist-title{
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 40px;
+    overflow: hidden;
+    color: rgb(255, 255, 255, .8);
+    margin-bottom: 10px;
+}
+
+.album-title p,
+.artist-title p{
+    width: auto;
+    min-width: 800px;
+}
+
+
+.album-artist,
+.artist-artist{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255, .76);
+}
+
+
+
+.album-artist p{
+    height: 100%;
+    margin: 0px 2px;
+    display: flex;
+    align-items: center;
+}
+
+.album-artist p:nth-child(3){
+    font-size: 15px;
+    color: rgb(255, 255, 255, .5);
+}
+
+
+.album-buttons,
+.artist-buttons{
+    position: absolute;
+   left: 10px;
+    bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.album-buttons button,
+.artist-buttons button{
+    margin: 0px 3px;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    background-color: rgb(255, 255, 255, .3);
+    backdrop-filter: blur(10px);
+    color: rgb(255, 255, 255, .8);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* justify-content: center; */
+}
+
+
+
+.play-album-btn,
+.play-artist-btn,
+.play-playlist-btn{
+    width: 80px;
+    padding-left: 3px;
+}
+
+.shuffle-album-btn, 
+.shuffle-artist-btn,
+.shuffle-playlist-btn{
+    padding-left: 5px;
+}
+
+.shuffle-album-btn #album-shuffle-check, 
+.shuffle-artist-btn #artist-shuffle-check,
+.shuffle-playlist-btn #playlist-shuffle-check{
+    display: none;
+}
+
+.shuffle-album-btn.checked,
+.shuffle-artist-btn.checked,
+.shuffle-playlist-btn.checked{
+    color: #4d4dff;
+}
+
+.shuffle-playlist-btn input{
+    display: none;
+}
+
+
+.play-album-btn svg,
+.shuffle-album-btn svg,
+.play-artist-btn svg,
+.play-playlist-btn svg,
+.shuffle-artist-btn svg,
+.shuffle-playlist-btn svg{
+   width: 20px; 
+   height: 20px;
+   margin-right: 6px;
+}
+
+.album-buttons button:nth-child(3),
+.artist-buttons button:nth-child(3){
+    /* height: 30px; */
+    background: none;
+}
+
+.album-song-container,
+.artist-song-container{
+    width: 100%;
+    height: calc(100% - 250px);
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.album-song-list,
+.artist-song-list{
+    width: 95%;
+    height: auto;
+    /* background: blue; */
+}
+
+.dynamicAlbum .song, .dynamicArtist .song,
+.dynamicPlaylist .song{
+    width: 100%;
+    height: 60px;
+    margin: 5px 0px;
+    /* background: blue; */
+    background: rgb(255, 255, 255, .1);
+    cursor: pointer;
+    display: grid;
+    position: relative;
+    border-radius: 5px;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-gap: 10px;
+}
+
+.dynamicAlbum .song:hover, .dynamicArtist .song:hover{
+    background: rgb(255, 255, 255, .2);
+}
+
+.dynamicAlbum .song:nth-child(1), .dynamicArtist .song:nth-child(1){
+    margin-top: 20px;
+}
+
+.dynamicAlbum .song-no, .dynamicArtist .song-no,
+.dynamicPlaylist .song-no{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255, .8);
+    font-size: 18px;
+}
+
+.dynamicAlbum .song-text, .dynamicArtist .song-text,
+.dynamicPlaylist .song-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dynamicAlbum .song .cell, .dynamicArtist .song .cell,
+.dynamicPlaylist .song .cell{
+    /* background: red; */
+}
+
+.dynamicAlbum .song-title,
+.dynamicArtist .song-title,
+.dynamicPlaylist .song-title{
+    overflow: hidden;
+    width: 300px;
+    height: auto;
+}
+
+.dynamicAlbum .song-artist,
+.dynamicArtist .song-artist,
+.dynamicPlaylist .song-artist{
+    overflow: hidden;
+    width: 300px;
+    height: auto;
+}
+
+.dynamicAlbum .song-title p,
+.dynamicArtist .song-title p,
+.dynamicPlaylist .song-title p{
+    font-size: 19px;
+    width: 800px;
+    color: rgb(255, 255, 255, .8);
+    font-weight: 800;
+}
+
+.dynamicAlbum .song-artist p,
+.dynamicArtist .song-artist p,
+.dynamicPlaylist .song-artist p{
+    color: rgb(255, 255, 255, .5);
+}
+
+.dynamicAlbum .song-options,
+.dynamicArtist .song-options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dynamicAlbum .song-options button,
+.dynamicArtist .song-options button,
+.dynamicPlaylist .song-options button{
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+
+.dynamicAlbum .song-options svg,
+.dynamicArtist .song-options svg,
+.dynamicPlaylist .song-options svg{
+    width: 20px;
+    height: 30px;
+    color: rgb(255, 255, 255, .8);
+}
+
+.album-close, 
+.artist-close,
+.playlist-close{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    pointer-events: all;
+    /* display: none; */
+}
+
+.artist-close,
+.playlist-close{
+    display: flex;
+}
+
+.album-close:hover,
+.artist-close:hover,
+.playlist-close:hover{
+    cursor: pointer;
+}
+
+.album-close.show,
+.playlist-close.show{
+    display: flex;
+}
+
+.album-close i,
+.artist-close i,
+.playlist-close i{
+    font-size: 30px;
+    color: rgb(255, 0, 0, .7);
+}
+
+.dynamicArtist .song,
+.dynamicPlaylist .song{
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    grid-gap: 10px;
+    visibility: hidden;
+}
+
+.dynamicArtist .song.show,
+.dynamicPlaylist .song.show{
+    visibility: initial;
+}
+
+.dynamicArtist .song .cell{
+    /* background: aqua; */
+}
+
+.dynamicArtist .title,
+.dynamicPlaylist .title{
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.dynamicArtist .song .cover,
+.dynamicPlaylist .song .cover{
+    width: 47px;
+    height: 80%;
+    position: relative;
+    /* background: purple; */
+}
+
+.dynamicArtist .song .cover img,
+.dynamicPlaylist .song .cover img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.dynamicArtist .song .cover button,
+.dynamicPlaylist .song .cover button{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.dynamicArtist .song-text,
+.dynamicPlaylist .song-text{
+    width: calc(100% - 57px);
+    height: 80%;
+    margin-left: 10px;
+    /* background: blue; */
+}
+
+.dynamicArtist .song-artist,
+.dynamicPlaylist .song-artist{
+    color: rgb(255, 255, 255, .5);
+}
+
+.dynamicArtist .options,
+.dynamicPlaylist .options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dynamicArtist .options svg,
+.dynamicPlaylist .options svg{
+    width: 20px;
+    color: rgb(255, 255, 255, .5);
+    height: 20px;
+}
+
+.dynamicAlbum .song .options-list,
+.dynamicArtist .song .options-list,
+.dynamicPlaylist .song .options-list{
+    position: absolute;
+    right: 0;
+    top: 45px;
+    height: 150px;
+    overflow-x: hidden;
+}
+
+.dynamicAlbum .song .options-list .part,
+.dynamicArtist .song .options-list .part,
+.dynamicPlaylist .song .options-list .part{
+   height: 33.3%;
+}
+
+.dynamicAlbum .song .options-list.show,
+.dynamicArtist .song .options-list.show,
+.dynamicPlaylist .song .options-list.show{
+  display: flex;
+}
+
+
+.dynamicAlbum .song .options-overflow,
+.dynamicArtist .song .options-overflow,
+.dynamicPlaylist .song .options-overflow{
+    width: 100%;
+    height: 350px;
+}
+
+.dynamicAlbum .album-buttons{
+    /* position: relative; */
+}
+
+.dynamicAlbum .album-buttons .options-list{
+    position: absolute;
+    bottom: -155px;
+    right: -150px;
+    height: 150px;
+    z-index: 1;
+}
+
+.dynamicAlbum .album-buttons .options-list .part    {
+    height: 33.3%;
+}

@@ -3,28 +3,319 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejs</title>
+    <title>Music Streaming</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window.songs{
+            width: 80vw;
+            min-height: 100vh;
+            height: fit-content;
+            background: rgb(134, 134, 255);
+        }
+
+        .window.songs .row{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 0.7fr 6fr 5fr 1fr;
+    grid-gap: 10px;
+}
+
+.window.songs .row .no{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.window.songs .heads{
+    height: 30px;
+    /* padding-bottom: 10px; */
+    border-bottom: 1px solid rgb(255, 255, 255, .3);
+    margin-bottom: 20px;
+    /* background-color: rgb(255, 255, 255, .3); */
+}
+
+.window.songs .song{
+    height: 58px;
+    /* padding-bottom: 10px; */
+    /* background: #fff; */
+    /* background-color: rgb(255, 255, 255, .8); */
+    backdrop-filter: blur(10px);
+    position: relative;
+    color: rgb(255, 255, 255, .8);
+    border-radius: 5px;
+    /* visibility: hidden; */
+    margin: 1.5px, 0px;
+}
+
+.song.lift{
+    z-index: 1;
+}
+
+.window.songs .song.show{
+    visibility: initial
+}
+
+.window.songs .song:hover{
+    background-color: rgb(255, 255, 255, .12);
+    backdrop-filter: blur(10px);
+}
+
+.window.songs .song .title{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  overflow: hidden;
+}
+
+.window.songs .song .album,
+.window.songs .song .duration,
+.window.songs .song .no{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    overflow: hidden;
+  }
+
+
+.window.songs .song .duration{
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.window.songs .song .album p{
+    width: 800px;
+}
+
+
+.window.songs .song .album:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+
+.window.songs .song .cover{
+  width: 47px;
+  height: 80%;
+  position: relative;
+  background: #00004b;
+}
+
+.window.songs .song .no{
+    position: relative;
+}
+
+.window.songs .song .play-button{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: rgb(255, 255, 255, .5);
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+
+.window.songs .song .play-button:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255, .8);
+}
+
+
+.window.songs .song:hover .no .play-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window.songs .song:hover .no p{
+    display: none;
+}
+
+
+.window.songs .song .img{
+    width: 100%;
+    height: 100%;
+    /* background: #00004b; */
+}
+
+.window.songs .song .song-text{
+    margin-left: 5px;
+    width: calc(100% - 62px);
+    height: 80%;
+    /* background: #00004b; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.window.songs .song .song-artist p{
+    color: rgb(255, 255, 255, .5);
+}
+
+.window.songs .song .song-title p{
+   font-size: 17px;
+   width: 800px;
+   height: auto;
+}
+
+.window.songs .song-title p:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.window.songs .song-artist p:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+    </style>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <h2><%= songs[0] %></h2>
+
+    <div class="window songs">
+
+    </div>
+
     <audio controls>
-        <source src="/audio/<%= songs[0]%>" type="audio/mpeg">
+        <source src="" type="audio/mpeg">
         Your browser does not support the audio tag.
       </audio>
+    
 
     <script>
         const customHeaders = {'Content-Type': "application/json"}
-         fetch('http://localhost:3000/music', {
+        let songList = []
+       fetch('/', {
             method: 'GET',
             contentType: 'application/json',
             headers: customHeaders,
+            mode: 'no-cors'
         }).then((response) => response.json())
         .then((json) => {
-            console.log(json)
+            // console.log(json)
+            json.forEach(element => {
+                songList.push(element)    // console.log(songList)
+            });
+            // jsonExport(json)
+            console.log('YES')
+            displaySongs(songList)
+            songActions()
         }).catch((err)=>{
             console.log(err)
+            console.log('NO')
         })
+
+        function displaySongs(songList){
+            document.querySelector('.window').innerHTML = ''
+        songList.forEach(el => {
+            const songInd = songList.indexOf(el)
+    const songNo = songList.indexOf(el) + 1    
+    let base64String = ""
+    let coverURL
+
+    if(el.cover == 'unknown cover'){
+        // console.log('no')
+        coverURL = ''
+    }else{
+        // console.log('yes')
+        const data = el.cover.imageBuffer.data
+        const format = el.cover.imageBuffer.mime
+        for (let i = 0; i < data.length; i++) {
+            base64String += String.fromCharCode(data[i])
+       }
+       coverURL = `data:${format};base64,${window.btoa(base64String)}`
+    }
+
+    const song = `
+        <div class="row song" data-path="${el.path}">
+        <div class="cell no"><p>${songNo}</p>
+            <button class="play-button" data-index="${songInd}">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="cell title">
+            <div class="cover">
+                <img class="img" src="${coverURL}" alt="">
+            </div>
+            <div class="song-text">
+                <div class="song-title">
+                    <p data-index="${songInd}">${el.title}</p>
+                </div>
+                <div class="song-artist">
+                    <p data-artist="${el.artist}">${el.artist}</p>
+                </div>
+            </div>
+        </div>
+        <div class="cell album" data-album="${el.album}">${el.album}</div>
+        <div class="cell duration">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+    	</svg>
+        </div>
+    </div>
+    `
+    document.querySelector('.window').innerHTML += song
+
+        })
+        }
+
+    function songActions(){
+        const allSongs = document.querySelectorAll('.song')
+        // document.querySelector('.window').innerHTML += allSongs[0].dataset.path
+        allSongs.forEach(song => {
+            // console.log('dd')
+            song.addEventListener('click', ()=>{
+                console.log('click')
+                const URL = `/share/${song.dataset.path}`
+
+                fetch(URL , {
+                method: 'GET',
+                contentType: 'application/json',
+                headers: customHeaders,
+                mode: 'no-cors'
+                }).then((response) => response.json())
+                .then((json) => {
+                console.log(json)
+                let base64String
+                
+                const data = json.data
+                        const format = 'audio/mpeg'
+                        for (let i = 0; i < data.length; i++) {
+                            base64String += String.fromCharCode(data[i])
+                    }
+                   const coverURL = `data:${format};base64,${window.btoa(base64String)}`
+                // jsonExport(json)
+                console.log(coverURL)
+                 document.querySelector('audio').src = coverURL
+                 document.querySelector('audio').play()
+                }).catch((err)=>{
+                console.log(err)
+                console.log('NO')
+                })
+            })
+        })
+
+    }
+       
+
     </script>
 </body>
 </html>
